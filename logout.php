@@ -1,9 +1,9 @@
-<?php
-session_start();         // Mulai session
-session_unset();         // Hapus semua variabel session
-session_destroy();       // Hapus session sepenuhnya
+<?php 
+session_start();
+unset($_SESSION['admin']);
 
-// Arahkan kembali ke halaman login
-header("Location: index.php");
-exit;
+if(!isset($_SESSION['admin'])){
+	header('location:../index.php');
+}
+
 ?>
