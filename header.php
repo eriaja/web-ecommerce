@@ -1,69 +1,93 @@
 <?php 
-// header.php
+session_start();
+include '../koneksi/koneksi.php';
+if(!isset($_SESSION['admin'])){
+	header('location:index.php');
+}
 ?>
+
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lokalista - Etalase Produk Lokal Terbaik</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #ee4d2d;
-            --secondary-color: #ffc107;
-            --accent-color: #ff7043;
-            --text-dark: #2C3E50;
-            --light-gray: #F8F9FA;
-        }
+	<title>Ecommerce produk lokal</title>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css">
+	<script  src="../js/jquery.js"></script>
+	<script  src="../js/bootstrap.min.js"></script>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-        }
 
-        .navbar {
-            background: linear-gradient(135deg, var(--primary-color), #ff5722);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 1rem 0;
-            z-index: 1050;
-        }
-
-        .navbar-brand {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: white !important;
-        }
-
-        .navbar-nav .nav-link {
-            color: white !important;
-            font-weight: 500;
-            margin: 0 10px;
-        }
-
-        .navbar-nav .nav-link:hover {
-            color: var(--secondary-color) !important;
-        }
-    </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="index.php">Lokalista</a>
-        <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="produk.php">Produk</a></li>
-                <li class="nav-item"><a class="nav-link" href="tentang.php">Tentang</a></li>
-                <li class="nav-item"><a class="nav-link" href="kontak.php">Kontak</a></li>
-                <li class="nav-item"><a class="nav-link" href="keranjang.php"><i class="fas fa-shopping-cart"></i> Keranjang</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+	<nav class="navbar navbar-default" style="padding: 5px;">
+		<div class="container">
+
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-left">
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-folder-close"></i> Data Master <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="m_produk.php">Master Produk</a></li>
+							<li><a href="m_customer.php">Master Customer</a></li>
+						</ul>
+					</li>
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-retweet"></i> Data Transaksi <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="produksi.php">Produksi</a></li>
+							<li><a href="inventory.php">Inventory</a></li>
+							
+						</ul>
+					</li>
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-stats"></i> Laporan <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="laporan_penjualan.php">Laporan Penjualan</a></li>
+							<li><a href="laporan_profit.php">Laporan Profit</a></li>
+							<li><a href="laporan_omset.php">Laporan Omset</a></li>
+							<li><a href="laporan_pembatalan.php">Laporan Pembatalan	</a></li>
+							<li><a href="laporan_inventory.php">Laporan Inventory</a></li>
+							<li><a href="laporan_produksi.php">Laporan Produksi</a></li>
+						</ul>
+					</li>
+					<li><a href="halaman_utama.php">Dashboard</a></li>
+
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i> Pemeliharaan <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="../DATABASE/backup.php">Backup Database</a></li>
+							<li><a href="../DATABASE/retrieve.php">Retrieve Database</a></li>
+						</ul>
+					</li>
+
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-user"></i> Admin <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="proses/logout.php">Log Out</a></li>
+						</ul>
+					</li>
+
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+
+
+
